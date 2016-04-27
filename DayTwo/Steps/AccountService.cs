@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DayTwo
 {
@@ -13,19 +16,27 @@ namespace DayTwo
             _storage = storage;
         }
 
-        public void Deposit(int amount)
+        public void Deposit(decimal amount)
         {
-            _storage.Insert(new AccountTransaction(amount));
+            _storage.Insert(new AccountTransaction(amount, DateTime.Now));
         }
 
-        public void Withdraw(int amount)
+        public void Withdraw(decimal amount)
         {
-            throw new NotImplementedException();
+            _storage.Insert(new AccountTransaction(-amount, DateTime.Now));
         }
 
         public void PrintStatement()
         {
-            throw new NotImplementedException();
+            IEnumerable<AccountTransaction> transactions = _storage.GetAllTransactions();
+            _printerSystem.PrintLine("DATE | AMOUNT | BALANCE");
+            var transactionsOrdered = transactions.OrderByDescending(t => t.Date).ToList();
+            decimal balance = 0;
+            foreach (var accountTransaction in transactionsOrdered)
+            {
+                balance += accountTransaction.Amount;
+                _printerSystem.PrintLine(string.Format("{0} | {1} | {2}", accountTransaction.Date.ToString("d"), accountTransaction.Amount.ToString("F2"), balance.ToString("F2")));
+            }
         }
     }
 }

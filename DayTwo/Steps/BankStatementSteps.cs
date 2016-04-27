@@ -35,9 +35,10 @@ namespace DayTwo
         public void ThenTheBalanceShouldBeDollars(int balance)
         {
             accountService.PrintStatement();
-            A.CallTo(() => printerSystem.PrintLine("BALANCE 900")).MustHaveHappened();
-            A.CallTo(() => printerSystem.PrintLine("BALANCE 900")).MustHaveHappened();
-            A.CallTo(() => printerSystem.PrintLine("BALANCE 900")).MustHaveHappened();
+            A.CallTo(() => printerSystem.PrintLine("DATE | AMOUNT | BALANCE")).MustHaveHappened();
+            A.CallTo(() => printerSystem.PrintLine("10/04/2014 | 500,00 | 1400,00")).MustHaveHappened();
+            A.CallTo(() => printerSystem.PrintLine("02/04/2014 | -100,00 | 900,00")).MustHaveHappened();
+            A.CallTo(() => printerSystem.PrintLine("01/04/2014 | 1000,00 | 1000,00")).MustHaveHappened();
         }
     }
 }

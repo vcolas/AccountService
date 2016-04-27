@@ -1,10 +1,18 @@
-﻿namespace DayTwo
+﻿using System.Collections.Generic;
+
+namespace DayTwo
 {
     public class Storage : IStorage
     {
+        List<AccountTransaction> Transactions = new List<AccountTransaction>();
         public void Insert(AccountTransaction transaction)
         {
-            throw new System.NotImplementedException();
+            Transactions.Add(transaction);
+        }
+
+        public IEnumerable<AccountTransaction> GetAllTransactions()
+        {
+            return Transactions;
         }
     }
 }
