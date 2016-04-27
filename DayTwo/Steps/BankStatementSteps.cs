@@ -6,11 +6,11 @@ namespace DayTwo.TDD
     [Binding]
     public class BankStatementSteps
     {
-        private AccountService accountService;
-        private PrinterSystem printerSystem;
+        private static AccountService accountService;
+        private static PrinterSystem printerSystem;
 
         [BeforeTestRun]
-        public void Setup()
+        public static void Setup()
         {
             //accountStore = new AccountStore();
             printerSystem = new PrinterSystem();
