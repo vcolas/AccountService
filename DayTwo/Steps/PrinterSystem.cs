@@ -1,6 +1,6 @@
-namespace DayTwo.TDD
+namespace DayTwo
 {
-    public class PrinterSystem
+    public class PrinterSystem : IPrinterSystem
     {
         public void PrintLine(string line)
         {

@@ -1,20 +1,21 @@
 using System;
 
-namespace DayTwo.TDD
+namespace DayTwo
 {
     public class AccountService
     {
-        private readonly PrinterSystem _printerSystem;
+        private readonly IPrinterSystem _printerSystem;
+        private readonly IStorage _storage;
 
-        public AccountService(PrinterSystem printerSystem)
+        public AccountService(IPrinterSystem printerSystem, IStorage storage)
         {
             _printerSystem = printerSystem;
-            throw new NotImplementedException();
+            _storage = storage;
         }
 
         public void Deposit(int amount)
         {
-            throw new NotImplementedException();
+            _storage.Insert(new AccountTransaction(amount));
         }
 
         public void Withdraw(int amount)

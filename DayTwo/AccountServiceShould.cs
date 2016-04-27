@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FakeItEasy;
+﻿using FakeItEasy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DayTwo
 {
-
+    [TestClass]
     public class AccountServiceShould
     {
-        
+        [TestMethod]
         public void store_a_transaction_when_depositing_money()
         {
-            //var accountService = new AccountService();
+            var amount = 100;
+            var printerSytem = A.Fake<IPrinterSystem>();
+            var storage = A.Fake<IStorage>();
+            var accountService = new AccountService(printerSytem, storage);
+
+            accountService.Deposit(amount);
+
+            A.CallTo(() => storage.Insert(A<AccountTransaction>.That.Matches(a => a.Amount == amount))).MustHaveHappened();
+            //A.CallTo(()=> storage.Insert(A<AccountTransaction>.Ignored)).MustHaveHappened();
+            //A.CallTo(()=> storage.Insert(new AccountTransaction(amount))).WithAnyArguments().MustHaveHappened();
         }
     }
 }

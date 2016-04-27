@@ -1,20 +1,22 @@
 ﻿using FakeItEasy;
 using TechTalk.SpecFlow;
 
-namespace DayTwo.TDD
+namespace DayTwo
 {
     [Binding]
     public class BankStatementSteps
     {
         private static AccountService accountService;
-        private static PrinterSystem printerSystem;
+        private static IPrinterSystem printerSystem;
+        private static IStorage storage;
 
         [BeforeTestRun]
         public static void Setup()
         {
             //accountStore = new AccountStore();
             printerSystem = new PrinterSystem();
-            accountService = new AccountService(printerSystem);
+            storage = new Storage();
+            accountService = new AccountService(printerSystem,storage);
         }
 
         [Given(@"I have deposited an amount of '(.*)' dollars into my account")]
